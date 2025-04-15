@@ -1,14 +1,17 @@
 import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({image, price, description , id }) => {
+const Card = ({title, image, price, description , id}) => {
 const navigate = useNavigate();
   if(description.length > 50) {
     description = description.slice(0, 50) + '  see more...';
   }
+  if(title.length < 50) {
+    title = title.slice(0, 15);
+  }
   return (
     <div  onClick={()=> {navigate(`/product/${id}`)
-    }} className="w-[190px] h-[275px] bg-white rounded-2xl shadow-md border border-white/20 overflow-hidden relative transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:shadow-2xl hover:border-purple-500/20 active:scale-95 font-sans">
+    }} className="cursor-pointer w-[190px] h-[275px] bg-white rounded-2xl shadow-md border border-white/20 overflow-hidden relative transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 hover:shadow-2xl hover:border-purple-500/20 active:scale-95 font-sans">
       
       {/* Shine Effect */}
       <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_40%,rgba(255,255,255,0.8)_50%,transparent_60%)] opacity-0 hover:opacity-100 animate-[shine_3s_infinite] pointer-events-none" />
@@ -31,9 +34,9 @@ const navigate = useNavigate();
 
 
         {/* Text */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 ">
           <h3 className="text-slate-800 font-bold text-[1.1em] transition-all duration-300 hover:text-purple-600 hover:translate-x-[2px]">
-            Cool Product
+            {title}
           </h3>
           <p className="text-slate-800 text-sm opacity-70 transition-all duration-300 hover:opacity-100 hover:translate-x-[2px]">
             {description}
