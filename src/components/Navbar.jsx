@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-
+import { ShoppingCart } from 'lucide-react';
+import { useSelector } from 'react-redux';
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const cartItems = useSelector((state) => state.cart);
+  console.log(cartItems.cartItems.length);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 font-sans">
@@ -13,11 +16,18 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6  justify-center items-center">
           <Link to="/" className="text-gray-700 hover:text-purple-500 transition-all duration-200 text-base font-medium">Home</Link>
           <Link to="/about" className="text-gray-700 hover:text-purple-500 transition-all duration-200 text-base font-medium">About</Link>
           <Link to="/products" className="text-gray-700 hover:text-purple-500 transition-all duration-200 text-base font-medium">Products</Link>
           <Link to="/contact" className="text-gray-700 hover:text-purple-500 transition-all duration-200 text-base font-medium">Contact</Link>
+          <Link to="/cart" className=" relative flex items-center gap-2 left-3 text-gray-700 hover:text-purple-500 transition-all duration-200 text-base font-medium">Cart
+          <button className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow hover:scale-105 transition">
+              <ShoppingCart className="w-4 h-4 animate-pulse" />
+            </button>
+            <div className='h-4 w-4 flex items-center justify-center rounded-xl relative right-5 bottom-3 bg-white text-red-700'>{cartItems.cartItems.length}</div>
+
+            </Link>
         </div>
 
         {/* Mobile Toggle Button */}
@@ -35,6 +45,16 @@ const Navbar = () => {
           <Link to="/about" onClick={() => setOpen(false)} className="block text-gray-700 hover:text-purple-500 transition text-base">About</Link>
           <Link to="/products" onClick={() => setOpen(false)} className="block text-gray-700 hover:text-purple-500 transition text-base">Products</Link>
           <Link to="/contact" onClick={() => setOpen(false)} className="block text-gray-700 hover:text-purple-500 transition text-base">Contact</Link>
+          <div className='flex items-center space-x-2'>
+
+          <Link to="/cart" onClick={() => setOpen(false)} className="block flex items-center gap-2 text-gray-700 hover:text-purple-500 transition text-base">Cart
+          <button className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow hover:scale-105 transition">
+              <ShoppingCart className="w-4 h-4 animate-pulse" />
+            </button>
+          </Link>
+
+          </div>
+
         </div>
       )}
     </nav>

@@ -1,14 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
-
 const SingleProduct = () => {
   const products = useSelector((state) => state.product);
   const { id } = useParams();
   const data = products.data.products.find((p) => p.id === parseInt(id));
+ 
+  
+
 
   return (
+    <>
+    
     <div className="max-w-screen-xl mx-auto p-6 bg-purple-50 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8 rounded-3xl shadow-xl border border-purple-100">
 
@@ -24,6 +27,7 @@ const SingleProduct = () => {
             alt={data.title}
             className="w-full h-full object-contain p-6 relative z-10"
           />
+         
         </div>
 
         {/* Product Details */}
@@ -37,9 +41,7 @@ const SingleProduct = () => {
               ${(data.price / (100 - data.discountPercentage) * 100).toFixed(2)}
             </span>
             <span className="text-md text-green-600">-{data.discountPercentage}% Off</span>
-            <button className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow hover:scale-105 transition">
-              <ShoppingCart className="w-4 h-4 animate-pulse" />
-            </button>
+          
           </div>
 
           {/* Rating */}
@@ -76,7 +78,9 @@ const SingleProduct = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div>  
+    </>
+
   );
 };
 

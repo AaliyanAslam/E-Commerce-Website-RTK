@@ -1,7 +1,7 @@
 import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({title, image, price, description , id}) => {
+const Card = ({title, image, price, description , id , add}) => {
 const navigate = useNavigate();
   if(description.length > 50) {
     description = description.slice(0, 50) + '  see more...';
@@ -48,8 +48,8 @@ const navigate = useNavigate();
           <span className="text-slate-800 font-bold text-base transition-all duration-300 hover:text-purple-600 hover:translate-x-[2px]">
             {price}
           </span>
-          <button className="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-100 hover:shadow-[0_0_0_4px_rgba(124,58,237,0.2)]">
-            <ShoppingCart className="w-4 h-4 animate-[pulse_1.5s_infinite]" />
+          <button onClick={(e)=>{e.stopPropagation(); add()}} className="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-100 hover:shadow-[0_0_0_4px_rgba(124,58,237,0.2)]">
+            <ShoppingCart className="w-4 h-4 animate-[pulse_1.5s_infinite]"/>
           </button>
         </div>
       </div>
