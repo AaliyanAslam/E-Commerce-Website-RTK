@@ -1,13 +1,54 @@
-import { ShoppingCart } from 'lucide-react';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { ShoppingCart } from "lucide-react";
+import React, { useEffect , useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increaseQ , decreaseQ , addTotalPriceAndQuaintity } from "../config/redux/reducers/cartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
 
+const total = useSelector((state)=> state.cart.totalPrice)
+// console.log(total);
+
+const [totalPrice , setTotalPrice] = useState("")
+
+// setTotalPrice(total)
+// console.log(totalPrice);
+
+
+
+
+  const increaseQuantity = (cart) => {
+    dispatch(increaseQ(cart.id));
+    console.log("clicked");
+    dispatch(addTotalPriceAndQuaintity(cart))
+
+    // console.log(dispatch(increaseQ(cart)));
+  };
+  const decreaseQuaintity = (cart) => {
+    dispatch(decreaseQ(cart.id));
+    dispatch(addTotalPriceAndQuaintity(cart))
+    console.log("clicked");
+    // console.log(dispatch(increaseQ(cart)));
+  };
+
+
+  useEffect(()=> {
+
+setTotalPrice(total)
+console.log(totalPrice);
+
+
+  }, [totalPrice])
+
+
+  
+
   return (
     <>
+    <div>{total}</div>
       <div className="max-w-screen-xl mx-auto p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-purple-50 to-white min-h-screen">
         <div className="bg-white p-4 sm:p-6 lg:p-10 rounded-3xl shadow-2xl border border-purple-100">
           <h1 className="text-center flex flex-col sm:flex-row items-center justify-center text-2xl sm:text-3xl lg:text-4xl font-bold gap-3 text-purple-700 mb-8">
@@ -36,17 +77,29 @@ const Cart = () => {
                       <span className="text-base sm:text-lg font-semibold text-purple-800">
                         {cart.title}
                       </span>
-                      <span className="text-sm sm:text-base text-gray-600 space-x-2.5"><span className="price">${cart.price}</span> <span className="qty">x : {cart.quantity}</span></span>
+                      <span className="text-sm sm:text-base text-gray-600 space-x-2.5">
+                        <span className="price">${cart.price}</span>{" "}
+                        <span className="qty">x : {cart.quantity}</span>
+                      </span>
                     </div>
                   </div>
 
                   {/* Buttons */}
                   <div className="flex gap-2 justify-end sm:justify-start">
-                    <button className="px-3 py-1 text-sm bg-red-500 hover:bg-red-600 text-white rounded-lg shadow transition-all">
-                      Delete
+                    <button  onClick={() => {
+                        decreaseQuaintity(cart);
+                        
+                      }} className="px-3 py-1 text-sm bg-red-500 hover:bg-red-600 text-white rounded-lg shadow transition-all">
+                      -
                     </button>
-                    <button className="px-3 py-1 text-sm bg-green-500 hover:bg-green-600 text-white rounded-lg shadow transition-all">
-                      Add
+                    <button
+                      onClick={() => {
+                        increaseQuantity(cart);
+                        
+                      }}
+                      className="px-3 py-1 text-sm bg-green-500 hover:bg-green-600 text-white rounded-lg shadow transition-all"
+                    >
+                      +
                     </button>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react'
+import React , {useEffect , useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {fetchProducts} from '../config/redux/reducers/productsSlice'
 import Card from '../components/Cards'
@@ -6,7 +6,18 @@ import  {addToCarts}  from "../config/redux/reducers/cartSlice"
 
 const Products = () => {
     const dispatch = useDispatch()
+
     // const dispatch2 = useDispatch()
+    
+    const [showMessege , setShowMessege] = useState(false)
+    useEffect(()=>{
+      if(showMessege){
+       const timer =  setTimeout(()=> {
+setShowMessege(false)
+        } , 1000)
+        return()=> clearTimeout(timer)
+      }
+    },[showMessege])
     
     useEffect(() => {
         dispatch(fetchProducts())
@@ -17,14 +28,11 @@ const Products = () => {
       // const dispatch1 = useDispatch();
     
       const handleAddToCart = (product) => {
-        dispatch(addToCarts(product));
-        return (
-          <div className="fixed bottom-0 right-0 m-4 p-4 bg-green-500 text-white rounded-lg shadow-lg">
-            Item added to cart!
-            {console.log("added")
-            }
-          </div>
-        )
+        dispatch(addToCarts(product))
+       console.log("added")
+       setShowMessege(true)
+       
+        
       };
  
 
@@ -54,6 +62,14 @@ const Products = () => {
     <>
     
 <div className='flex flex-wrap gap-3 justify-center mt-4'>
+{showMessege && 
+  <div
+    className="fixed bottom-8 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-2xl z-50 
+               animate-slide-in opacity-90 transition-all duration-300 ease-out"
+  >
+    Item added to cart!
+  </div>
+}
 
     {data && data.products.map((product, index) => {
         return(

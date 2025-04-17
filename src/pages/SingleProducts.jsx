@@ -1,10 +1,23 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import  {addToCarts}  from "../config/redux/reducers/cartSlice"
 const SingleProduct = () => {
   const products = useSelector((state) => state.product);
   const { id } = useParams();
   const data = products.data.products.find((p) => p.id === parseInt(id));
+
+  const dispatch = useDispatch()
+
+
+  const handleAddToCart = (data)=>{
+    
+dispatch(addToCarts(data))
+console.log("clicked" , data);
+
+
+  }
  
   
 
@@ -73,7 +86,7 @@ const SingleProduct = () => {
           </div>
 
           {/* Add to Cart */}
-          <button className="w-full mt-4 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow hover:bg-purple-700 hover:shadow-lg transition-all duration-300">
+          <button onClick={()=> {handleAddToCart(data)}} className="w-full mt-4 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow hover:bg-purple-700 hover:shadow-lg transition-all duration-300">
             Add to Cart
           </button>
         </div>
