@@ -33,7 +33,7 @@ export const Home = () => {
         </motion.button>
       </section>
 
-      <Footer style="footer sm:footer-horizontal bg-white text-black-content p-10 border-gray" />
+      <Footer style="footer z-[1000] sm:footer-horizontal bg-white text-black-content p-10 border-gray" />
     </>
   )
 }
