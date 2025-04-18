@@ -37,7 +37,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <Footer style="footer sm:footer-horizontal bg-white text-black-content p-10 m-3 border-gray" />
+      <Footer style="footer sm:footer-horizontal bg-white text-black-content p-10  border-gray" />
     </>
   )
 }
