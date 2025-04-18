@@ -11,9 +11,16 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold text-gray-800">
-          <Link to="/">HyperCart</Link>
-        </div>
+      <div className="text-3xl font-extrabold text-purple-500 hover:text-purple-400 transition duration-300 drop-shadow-lg">
+  <Link
+    to="/"
+    className="tracking-tight font-sans hover:scale-105 transition-transform duration-300"
+  >
+    <span className="bg-gradient-to-r from-purple-500 via-purple-400 to-purple-600 bg-clip-text text-transparent">
+      HyperCart
+    </span>
+  </Link>
+</div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6  justify-center items-center">

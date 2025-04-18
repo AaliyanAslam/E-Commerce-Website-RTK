@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {fetchProducts} from '../config/redux/reducers/productsSlice'
 import Card from '../components/Cards'
 import  {addToCarts}  from "../config/redux/reducers/cartSlice"
+import Footer from "../components/Footer"
 
 const Products = () => {
     const dispatch = useDispatch()
@@ -61,7 +62,7 @@ setShowMessege(false)
   return (
     <>
     
-<div className='flex flex-wrap gap-3 justify-center mt-4'>
+<div className='flex flex-wrap gap-2 sm:gap-1 md:gap-3 lg:gap-4 justify-center mt-4 bg-white'>
 {showMessege && 
   <div
     className="fixed bottom-8 right-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-2xl z-50 
@@ -84,6 +85,7 @@ setShowMessege(false)
 </div>
    
 
+<Footer style="footer sm:footer-horizontal bg-white text-black-content p-10 m-3 border-gray" />
  
     </>
   )

@@ -1,8 +1,10 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
+  const navigate = useNavigate()
   return (
     <>
       <section className="min-h-screen bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 flex flex-col justify-center items-center text-center px-6">
@@ -20,14 +22,14 @@ export const Home = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="mt-4 text-lg sm:text-xl text-gray-700 max-w-xl"
         >
-          We help you build beautiful and fast web experiences.
+          Discover premium products crafted for your lifestyle
         </motion.p>
-        <motion.button
+        <motion.button onClick={()=> navigate("/products")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="mt-8 px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold shadow-md hover:bg-indigo-500 transition"
         >
-          Get Started
+         Start Pruchase
         </motion.button>
       </section>
 
